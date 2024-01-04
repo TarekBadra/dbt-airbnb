@@ -5,8 +5,8 @@ WITH raw_hosts AS (
         AIRBNB.RAW.RAW_HOSTS
 )
 SELECT
-    id as host_id,
-    name as host_name,
+    id AS host_id,
+    name AS host_name,
     is_superhost,
     created_at,
     updated_at
