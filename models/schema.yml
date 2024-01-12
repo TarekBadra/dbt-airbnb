@@ -30,6 +30,38 @@ models:
                 - "Hotel room"
                 
       - name: minimum_nights
+        description: '{{ doc("dim_listing_cleansed__minimum_nights") }}'
         tests:
           - positive_value
-              
+
+  - name: dim_hosts_cleansed
+    columns:
+      - name: host_id
+        tests:
+          - not_null
+          - unique
+      - name: host_name
+        tests:
+          - not_null
+      - name: is_superhost
+        tests:
+          - accepted_values:
+              values:
+                - "t"
+                - "f"
+
+  - name: fct_reviews
+    columns:
+      - name: listing_id
+        tests:
+          - relationships:
+              field: listing_id
+              to: ref('dim_listings_cleansed')
+
+      - name: review_sentiment
+        tests:
+          - accepted_values:
+              values:
+                - "Positive"
+                - "Neutral"
+                - "Negative"
